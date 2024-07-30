@@ -28,8 +28,8 @@ object InventoryManagement {
          inventory2.foldLeft(inventory1) {
             case (acc, (id, (name, quantity, price))) =>
                 acc.get(id) match {
-                    case Some((_, existingQuantity, existingPrice)) =>
-                        acc + (id -> (name, existingQuantity + quantity, math.max(existingPrice, price)))
+                    case Some((_, existingQuantity, _)) =>
+                        acc + (id -> (name, existingQuantity + quantity, price))
                     case None =>
                         acc + (id -> (name, quantity, price))
                 }
@@ -50,17 +50,17 @@ object InventoryManagement {
         println("Product names in first inventory : ")
         println(displayProductNames(inventory1))
 
-        println("Product names in second inventory : ")
+        println("\nProduct names in second inventory : ")
         println(displayProductNames(inventory2))
 
-        println("Is first inventory empty : " + isEmpty(inventory1))
+        println("\nIs first inventory empty : " + isEmpty(inventory1))
 
-        println("Is second inventory empty : " + isEmpty(inventory2))
+        println("\nIs second inventory empty : " + isEmpty(inventory2))
 
         val mergedInventory = mergeInventories(inventory1, inventory2)
-        println("Merged Inventory : "+ mergedInventory)
+        println("\nMerged Inventory : "+ mergedInventory)
 
-        checkProductExists(inventory1, 102)
+        checkProductExists(inventory1, 101)
     }
 }
 
